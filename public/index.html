@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VoxText AI — turn audio into text with a simple speech-to-text workspace." />
+  <title>VoxText AI — Audio Transcriber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">V</span><span>voxtext<span class="brand-ai">.ai</span></span></a>
+    <div class="top-right"><span class="status-dot"></span><span id="apiStatus">Checking API status</span><a class="github-link" href="#workspace">Open dashboard ↓</a></div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div class="eyebrow"><span></span> SPEECH-TO-TEXT WORKSPACE</div>
+      <h1>Your audio,<br><em>made readable.</em></h1>
+      <p class="intro-copy">Turn spoken words into useful text. Try the interactive demo, or connect your own Google Cloud Speech-to-Text API.</p>
+    </section>
+
+    <section class="workspace" id="workspace">
+      <div class="panel-heading">
+        <div><p class="section-kicker">01 / INPUT</p><h2>Upload audio</h2></div>
+        <div class="mode-switch" role="group" aria-label="Transcription mode">
+          <button class="mode-btn active" data-mode="demo">Demo mode</button>
+          <button class="mode-btn" data-mode="live">Live API</button>
+        </div>
+      </div>
+
+      <div class="mode-note" id="modeNote"><strong>Demo mode</strong> — explore the workflow using a sample transcript. No API key or billing account required.</div>
+
+      <label class="dropzone" id="dropzone" for="audioFile">
+        <input type="file" id="audioFile" accept=".wav,.flac,audio/wav,audio/flac" />
+        <span class="upload-icon">↑</span>
+        <strong>Drop your audio here</strong>
+        <span class="muted">or <span class="browse">browse files</span></span>
+        <small>WAV or FLAC · up to 10 MB</small>
+      </label>
+
+      <div class="file-preview hidden" id="filePreview">
+        <div class="file-symbol">♫</div><div class="file-meta"><strong id="fileName">audio.wav</strong><span id="fileSize">0 KB</span></div>
+        <button class="remove-file" id="removeFile" aria-label="Remove audio">×</button>
+      </div>
+      <audio id="audioPlayer" controls class="audio-player hidden"></audio>
+
+      <div class="settings-row">
+        <label class="field-label" for="language">Recognition language
+          <select id="language">
+            <option value="en-US">English (US)</option>
+            <option value="en-IN">English (India)</option>
+            <option value="es-ES">Spanish (Spain)</option>
+            <option value="hi-IN">Hindi (India)</option>
+            <option value="fr-FR">French</option>
+            <option value="de-DE">German</option>
+          </select>
+        </label>
+        <button class="transcribe-btn" id="transcribeBtn"><span>✦</span> Transcribe audio</button>
+      </div>
+
+      <div class="error-box hidden" id="errorBox" role="alert"></div>
+    </section>
+
+    <section class="result-panel">
+      <div class="result-top">
+        <div><p class="section-kicker">02 / OUTPUT</p><h2>Transcription</h2></div>
+        <div class="result-actions"><button class="utility-btn" id="copyBtn" disabled>Copy text</button><button class="utility-btn" id="downloadBtn" disabled>↓ .TXT</button></div>
+      </div>
+      <div class="transcript-area" id="transcript" aria-live="polite">
+        <div class="empty-state"><span class="quote-mark">“</span><p>Your transcription will appear here.</p><small>Upload an audio file and select Transcribe audio to begin.</small></div>
+      </div>
+      <div class="result-footer"><span id="resultLabel">WAITING FOR AUDIO</span><span>VOXTEXT AI / 01</span></div>
+    </section>
+
+    <section class="how-it-works">
+      <p class="section-kicker">BUILT WITH</p>
+      <div class="tech-list"><span>Google Cloud Speech-to-Text</span><span>Node.js + Express</span><span>JavaScript</span><span>REST API</span><span>JSON</span></div>
+    </section>
+
+    <footer><span>VoxText AI</span><span>Built as a learning project · API usage may incur Google Cloud charges</span></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
